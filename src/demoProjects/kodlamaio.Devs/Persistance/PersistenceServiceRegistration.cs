@@ -19,7 +19,7 @@ namespace Persistance
         {
             services.AddDbContext<BaseDbContext>(options =>
                                                      options.UseSqlServer(
-                                                         configuration.GetConnectionString("ProgrammingLanguageConnectionString")));
+                                                         configuration.GetConnectionString("KodlamaDevsConnectionString")));
             services.AddScoped<IProgrammingLanguageRepository, ProgrammingLanguageRepository>();
 
             return services;

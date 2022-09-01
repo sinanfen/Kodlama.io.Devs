@@ -12,7 +12,7 @@ namespace Application.Features.ProgrammingLanguages.Commands.CreateProgrammingLa
         public CreateProgrammingLanguageCommandValidator()
         {
             RuleFor(c => c.Name).NotEmpty(); //Programlama dili ismi boş geçilemez.
-            RuleFor(c => c.Name).MinimumLength(3);
+            RuleFor(c => c.Name).MinimumLength(2);
         }
     }
 }
