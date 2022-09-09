@@ -13,6 +13,8 @@ namespace Persistance.Contexts
     {
         protected IConfiguration Configuration { get; set; }
         public DbSet<ProgrammingLanguage> ProgrammingLanguages { get; set; }
+        public DbSet<Technology> Technologies { get; set; }
+
 
         public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration) : base(dbContextOptions)
         {
@@ -33,10 +35,24 @@ namespace Persistance.Contexts
                 a.ToTable("ProgrammingLanguages").HasKey(k => k.Id);
                 a.Property(p => p.Id).HasColumnName("Id");
                 a.Property(p => p.Name).HasColumnName("Name");
+                a.HasMany(p => p.Technologies);//Bir programlama dilinin çok teknolojisi olabilir.
             });
 
-            ProgrammingLanguage[] programmingLanguagesEntitySeeds = { new(1, "C#"), new(2, "Java") };
+            modelBuilder.Entity<Technology>(a =>
+            {
+                a.ToTable("Technologies").HasKey(k => k.Id);
+                a.Property(p => p.Id).HasColumnName("Id");
+                a.Property(p => p.Name).HasColumnName("Name");
+                a.Property(p => p.ProgrammingLanguageId).HasColumnName("ProgrammingLanguageId");
+                a.HasOne(p => p.ProgrammingLanguage);//Bir teknolojinin 1 ProgramlamaDili vardır. ASP.NET -> C# gibi.
+            });
+
+            ProgrammingLanguage[] programmingLanguagesEntitySeeds = { new(1, "C#"), new(2, "Java"), new(3, "JavaScript") };
             modelBuilder.Entity<ProgrammingLanguage>().HasData(programmingLanguagesEntitySeeds);
+
+            Technology[] technologiesEntitySeeds = { new(1, 1, "ASP.NET Core"), new(2, 2, "Spring"), new(3, 3, "React") };
+            modelBuilder.Entity<Technology>().HasData(technologiesEntitySeeds);
+
         }
     }
 }

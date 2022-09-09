@@ -29,7 +29,7 @@ namespace WebAPI.Controllers
             return Ok(result);
         }
 
-        [HttpPost("delete/{Id}")]
+        [HttpDelete("{Id}")]
         public async Task<IActionResult> Delete(
             [FromRoute] DeleteProgrammingLanguageCommand deleteProgrammingLanguageCommand)
         {
@@ -37,7 +37,7 @@ namespace WebAPI.Controllers
             return Created("", result);
         }
 
-        [HttpGet]
+        [HttpGet("GetList")]
         public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
         {
             GetListProgrammingLanguageQuery getListProgrammingLanguageQuery = new() { PageRequest = pageRequest };
