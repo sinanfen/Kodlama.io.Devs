@@ -1,4 +1,5 @@
 ﻿using Application.Features.Technologies.Commands.CreateTechnology;
+using Application.Features.Technologies.Commands.UpdateTechnolgy;
 using Application.Features.Technologies.Dtos;
 using Application.Features.Technologies.Models;
 using Application.Features.Technologies.Queries.GetListTechnology;
@@ -26,6 +27,13 @@ namespace WebAPI.Controllers
             //CreatedTechnologyDto result = await Mediator.Send(createTechnologyCommand);
             var result = await Mediator.Send(createTechnologyCommand); //İki satır da aynı işlemi yapıyor.
             return Created("", result);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update([FromBody] UpdateTechnologyCommand updateTechnologyCommand)
+        {
+            var result = await Mediator.Send(updateTechnologyCommand);
+            return Ok(result);
         }
     }
 }

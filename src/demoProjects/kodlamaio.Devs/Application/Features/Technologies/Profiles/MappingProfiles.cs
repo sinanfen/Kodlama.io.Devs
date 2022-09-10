@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Application.Features.Technologies.Dtos;
 using Application.Features.Technologies.Models;
 using Application.Features.Technologies.Commands.CreateTechnology;
+using Application.Features.Technologies.Commands.UpdateTechnolgy;
 
 namespace Application.Features.Technologies.Profiles
 {
@@ -24,8 +25,8 @@ namespace Application.Features.Technologies.Profiles
             CreateMap<Technology, CreatedTechnologyDto>().ReverseMap();
             CreateMap<Technology, CreateTechnologyCommand>().ReverseMap();
 
-            //CreateMap<Technology, UpdateTechnologyCommand>().ReverseMap();
-            //CreateMap<Technology, UpdatedTechnologyDto>().ReverseMap();
+            CreateMap<Technology, UpdateTechnologyCommand>().ReverseMap();
+            CreateMap<Technology, UpdatedTechnologyDto>().ReverseMap();
 
             //CreateMap<Technology, DeleteTechnologyCommand>().ReverseMap();
             //CreateMap<Technology, DeletedTechnologyDto>().ReverseMap();
