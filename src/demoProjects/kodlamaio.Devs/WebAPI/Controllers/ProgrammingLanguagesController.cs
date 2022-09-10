@@ -30,11 +30,10 @@ namespace WebAPI.Controllers
         }
 
         [HttpDelete("{Id}")]
-        public async Task<IActionResult> Delete(
-            [FromRoute] DeleteProgrammingLanguageCommand deleteProgrammingLanguageCommand)
+        public async Task<IActionResult> Delete([FromRoute] DeleteProgrammingLanguageCommand deleteProgrammingLanguageCommand)
         {
             DeletedProgrammingLanguageDto result = await Mediator.Send(deleteProgrammingLanguageCommand);
-            return Created("", result);
+            return Ok(result);
         }
 
         [HttpGet("GetList")]
@@ -52,6 +51,6 @@ namespace WebAPI.Controllers
             return Ok(programmingLanguageGetByIdDto);
         }
 
-       
+
     }
 }

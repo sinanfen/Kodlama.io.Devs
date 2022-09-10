@@ -10,6 +10,7 @@ using Application.Features.Technologies.Dtos;
 using Application.Features.Technologies.Models;
 using Application.Features.Technologies.Commands.CreateTechnology;
 using Application.Features.Technologies.Commands.UpdateTechnolgy;
+using Application.Features.Technologies.Commands.DeleteTechnology;
 
 namespace Application.Features.Technologies.Profiles
 {
@@ -28,8 +29,8 @@ namespace Application.Features.Technologies.Profiles
             CreateMap<Technology, UpdateTechnologyCommand>().ReverseMap();
             CreateMap<Technology, UpdatedTechnologyDto>().ReverseMap();
 
-            //CreateMap<Technology, DeleteTechnologyCommand>().ReverseMap();
-            //CreateMap<Technology, DeletedTechnologyDto>().ReverseMap();
+            CreateMap<Technology, DeleteTechnologyCommand>().ReverseMap();
+            CreateMap<Technology, DeletedTechnologyDto>().ReverseMap();
 
         }
     }
