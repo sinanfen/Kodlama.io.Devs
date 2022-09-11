@@ -13,12 +13,7 @@
     <Folder Include="Features\Developers\Queries\" />
     <Folder Include="Features\Developers\Commands\" />
     <Folder Include="Features\ProgrammingLanguages\Constants\" />
-    <Folder Include="Features\Socials\Rules\" />
     <Folder Include="Features\Socials\Profiles\" />
-    <Folder Include="Features\Socials\Dtos\" />
-    <Folder Include="Features\Socials\Models\" />
-    <Folder Include="Features\Socials\Queries\" />
-    <Folder Include="Features\Socials\Commands\" />
     <Folder Include="Features\Technologies\Constants\" />
     <Folder Include="Features\Technologies\Models\" />
     <Folder Include="Features\Technologies\Profiles\" />
