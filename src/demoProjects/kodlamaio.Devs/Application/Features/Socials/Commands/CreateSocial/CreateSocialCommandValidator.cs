@@ -12,7 +12,9 @@ namespace Application.Features.Socials.Commands.CreateSocial
         public CreateSocialCommandValidator()
         {
             RuleFor(s => s.DeveloperId).NotNull();
-            RuleFor(s => s.SocialUrl).NotEmpty().NotNull();
+            RuleFor(s => s.SocialUrl)
+                .NotEmpty()
+                .NotNull();
         }
     }
 }

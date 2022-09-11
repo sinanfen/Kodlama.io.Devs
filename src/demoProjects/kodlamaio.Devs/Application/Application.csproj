@@ -7,11 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Developers\Rules\" />
-    <Folder Include="Features\Developers\Profiles\" />
-    <Folder Include="Features\Developers\Dtos\" />
     <Folder Include="Features\Developers\Queries\" />
-    <Folder Include="Features\Developers\Commands\" />
     <Folder Include="Features\ProgrammingLanguages\Constants\" />
     <Folder Include="Features\Socials\Profiles\" />
     <Folder Include="Features\Technologies\Constants\" />
