@@ -11,15 +11,16 @@ namespace Domain.Entities
     {
         public int DeveloperId { get; set; }
         public string SocialUrl { get; set; }
-        public virtual Developer Developer { get; set; }
+        public virtual Developer? Developer { get; set; }
 
         public Social()
         {
 
         }
 
-        public Social(int developerId, string socialUrl) : this()
+        public Social(int id,int developerId, string socialUrl) : this()
         {
+            Id=id;
             DeveloperId = developerId;
             SocialUrl = socialUrl;
         }

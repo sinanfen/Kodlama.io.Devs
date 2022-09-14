@@ -1,5 +1,6 @@
 ﻿using Application.Services.Repositories;
 using Core.CrossCuttingConcerns.Exceptions;
+using Core.Persistence.Paging;
 using Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -18,12 +19,17 @@ namespace Application.Features.Socials.Rules
             _socialRepository = socialRepository;
         }
 
-        public async Task SocialGitHubLinkCanNotBeDuplicatedWhenInserted(int userId)
+        public async Task SocialGitHubLinkCanNotBeDuplicatedWhenInserted(string socialUrl)
         {
-            Social result = await _socialRepository.GetAsync(s=>s.DeveloperId==userId);
-            if (result != null) throw new BusinessException("There is already a GitHub link.");
+            IPaginate<Social> result = await _socialRepository.GetListAsync(s => s.SocialUrl == socialUrl);
+            if (result.Items.Any()) throw new BusinessException("Social Url already exist.");
         }
 
-      
+        public void SocialUrlShouldExistWhenRequested(Social social)
+        {
+            if (social == null) throw new BusinessException("Requested Social Url does not exist.");
+        }
+
+
     }
 }

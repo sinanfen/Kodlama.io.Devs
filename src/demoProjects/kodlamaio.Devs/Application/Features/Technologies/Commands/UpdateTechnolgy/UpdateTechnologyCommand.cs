@@ -1,4 +1,5 @@
 ﻿using Application.Features.Technologies.Dtos;
+using Application.Features.Technologies.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
@@ -21,19 +22,30 @@ namespace Application.Features.Technologies.Commands.UpdateTechnolgy
         {
             private readonly ITechnologyRepository _technologyRepository;
             private readonly IMapper _mapper;
+            private readonly TechnologyBusinessRules _technologyBusinessRules;
 
-            public UpdateTechnologyCommandHandler(ITechnologyRepository technologyRepository, IMapper mapper)
+            public UpdateTechnologyCommandHandler(ITechnologyRepository technologyRepository, IMapper mapper, TechnologyBusinessRules technologyBusinessRules)
             {
                 _technologyRepository = technologyRepository;
                 _mapper = mapper;
+                _technologyBusinessRules = technologyBusinessRules;
             }
 
             public async Task<UpdatedTechnologyDto> Handle(UpdateTechnologyCommand request, CancellationToken cancellationToken)
             {
                 //Technology technology = await _technologyRepository.GetAsync(t => t.Id == request.Id);
-                //_technologyBusinessRules.ProgrammingLanguageShouldBeExistWhenDeleted(social);  --iş kuralı eklediğimde çalışacak.
-                Technology mappedTechnology = _mapper.Map<Technology>(request);
-                Technology updatedTechnology = await _technologyRepository.UpdateAsync(mappedTechnology);
+                //_technologyBusinessRules.TechnologyShouldExistWhenRequested(technology);
+                //Technology mappedTechnology = _mapper.Map<Technology>(request);
+                //Technology updatedTechnology = await _technologyRepository.UpdateAsync(mappedTechnology);
+                //UpdatedTechnologyDto updatedTechnologyDto = _mapper.Map<UpdatedTechnologyDto>(updatedTechnology);
+                //return updatedTechnologyDto;
+
+                Technology technology = await _technologyRepository.GetAsync(t => t.Id == request.Id);
+
+                _technologyBusinessRules.TechnologyShouldExistWhenRequested(technology);
+
+                var updatedTechnology = await _technologyRepository.UpdateAsync(_mapper.Map(request, technology!));
+
                 UpdatedTechnologyDto updatedTechnologyDto = _mapper.Map<UpdatedTechnologyDto>(updatedTechnology);
                 return updatedTechnologyDto;
 

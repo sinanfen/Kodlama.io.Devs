@@ -32,7 +32,7 @@ namespace Application.Features.Socials.Commands.CreateSocial
 
             public async Task<CreatedSocialDto> Handle(CreateSocialCommand request, CancellationToken cancellationToken)
             {
-                await _socialBusinessRules.SocialGitHubLinkCanNotBeDuplicatedWhenInserted(request.DeveloperId);
+                await _socialBusinessRules.SocialGitHubLinkCanNotBeDuplicatedWhenInserted(request.SocialUrl);
                 Social mappedSocial = _mapper.Map<Social>(request);
                 Social createdSocial = await _socialRepository.AddAsync(mappedSocial);
                 CreatedSocialDto createdSocialDto = _mapper.Map<CreatedSocialDto>(createdSocial);

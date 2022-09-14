@@ -33,11 +33,22 @@ namespace Application.Features.ProgrammingLanguages.Commands.UpdateProgrammingLa
 
             public async Task<UpdatedProgrammingLanguageDto> Handle(UpdateProgrammingLanguageCommand request, CancellationToken cancellationToken)
             {
-                ProgrammingLanguage mappedProgrammingLanguage = _mapper.Map<ProgrammingLanguage>(request);
-                ProgrammingLanguage updatedProgrammingLanguage = await _programmingLanguageRepository.UpdateAsync(mappedProgrammingLanguage);
-                UpdatedProgrammingLanguageDto updatedProgrammingLanguageDto = _mapper.Map<UpdatedProgrammingLanguageDto>(updatedProgrammingLanguage);
+                ProgrammingLanguage programmingLanguage = await _programmingLanguageRepository.GetAsync(p => p.Id == request.Id);
+                _programmingLanguageBusinessRules.ProgrammingLanguageShouldExistWhenRequested(programmingLanguage);
+                programmingLanguage = await _programmingLanguageRepository.UpdateAsync(_mapper.Map(request, programmingLanguage));
+                UpdatedProgrammingLanguageDto updatedProgrammingLanguageDto = _mapper.Map<UpdatedProgrammingLanguageDto>(programmingLanguage);
 
                 return updatedProgrammingLanguageDto;
+
+                //Social social = await _socialRepository.GetAsync(p => p.Id == request.Id);
+
+                //_socialBusinessRules.SocialUrlShouldExistWhenRequested(social);
+
+                //social = await _socialRepository.UpdateAsync(_mapper.Map(request, social));
+
+                //UpdatedSocialDto updatedSocialDto = _mapper.Map<UpdatedSocialDto>(social);
+
+                //return updatedSocialDto;
             }
         }
     }

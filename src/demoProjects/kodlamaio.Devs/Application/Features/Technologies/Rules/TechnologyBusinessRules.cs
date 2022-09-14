@@ -26,10 +26,9 @@ namespace Application.Features.Technologies.Rules
             //Teknoloji adı halihazırda kayıtlıysa hata fırlatır.
         }
 
-        //public void TechnologyShouldExistWhenRequested(Technology technology)
-        //{
-        //    if (technology == null) throw new BusinessException("Requested technology does not exist.");
-        //}
-        //Query içersinde yazılacak (aktif edilecek) bir business rule.
+        public void TechnologyShouldExistWhenRequested(Technology technology)
+        {
+            if (technology == null) throw new BusinessException("Requested technology does not exist.");
+        }
     }
 }
