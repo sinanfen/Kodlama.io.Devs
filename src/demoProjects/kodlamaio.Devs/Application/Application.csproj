@@ -8,9 +8,7 @@
 
   <ItemGroup>
     <Folder Include="Features\Developers\Queries\" />
-    <Folder Include="Features\ProgrammingLanguages\Constants\" />
     <Folder Include="Features\Socials\Profiles\" />
-    <Folder Include="Features\Technologies\Constants\" />
     <Folder Include="Features\Technologies\Models\" />
     <Folder Include="Features\Technologies\Profiles\" />
     <Folder Include="Features\Technologies\Queries\" />

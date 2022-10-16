@@ -1,4 +1,5 @@
-﻿using Application.Features.Auths.Commands.Register;
+﻿using Application.Features.Auths.Commands.Login;
+using Application.Features.Auths.Commands.Register;
 using Application.Features.Auths.Dtos;
 using Application.Features.Developers.Commands.CreateDeveloper;
 using Application.Features.Developers.Commands.LoginDeveloper;
@@ -26,6 +27,22 @@ namespace WebAPI.Controllers
             SetRefreshTokenToCookie(result.RefreshToken);
             return Created("", result.AccessToken);
         }
+      
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] UserForLoginDto userForLoginDto)
+        {
+            LoginCommand loginCommand = new()
+            {
+                UserForLoginDto = userForLoginDto,
+                IpAddress = GetIpAddress()
+            };
+
+            LoggedDto result = await Mediator.Send(loginCommand);
+
+            SetRefreshTokenToCookie(result.RefreshToken);
+
+            return Ok(result.AccessToken);
+        }
 
         private void SetRefreshTokenToCookie(RefreshToken refreshToken)
         {
@@ -33,11 +50,6 @@ namespace WebAPI.Controllers
             Response.Cookies.Append("refreshToken", refreshToken.Token, cookieOptions);
         }
 
-        [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginDeveloperCommand loginDeveloperCommand)
-        {
-            var result = await Mediator.Send(loginDeveloperCommand);
-            return Ok(result);
-        }
     }
+
 }
